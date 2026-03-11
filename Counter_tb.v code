@@ -1,0 +1,24 @@
+module counter_tb;
+
+reg clk;
+reg reset;
+wire [7:0] count;
+
+counter_8bit uut (
+    .clk(clk),
+    .reset(reset),
+    .count(count)
+);
+
+// Clock generation (10 time unit ka period)
+always #5 clk = ~clk;
+
+initial begin
+    clk = 0;
+    reset = 1;
+
+    #10 reset = 0;   // reset LOW ? counter start
+    #200 $stop;      // simulation stop
+end
+
+endmodule
